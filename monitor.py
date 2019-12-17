@@ -10,16 +10,16 @@ def manf(bss):
             return line.split("~")[1].rstrip("\n")
     return "unknown"
 
-def pkt_callback(pkt):
-    if pkt.haslayer(Dot11Beacon):
-        bss = pkt.getlayer(Dot11).addr2.upper()
+def packet_callback(packet):
+    if packet.haslayer(Dot11Beacon):
+        bss = packet.getlayer(Dot11).addr2.upper()
         if bss not in APs:
             APs.append(bss)
 
-    elif pkt.haslayer(Dot11) and pkt.getlayer(Dot11).type == 2L and not pkt.haslayer(EAPOL):
+    elif packet.haslayer(Dot11) and packet.getlayer(Dot11).type == 2L and not packet.haslayer(EAPOL):
         # This means it's data frame.
-        sn = pkt.getlayer(Dot11).addr2.upper()
-        rc = pkt.getlayer(Dot11).addr1.upper()
+        sn = packet.getlayer(Dot11).addr2.upper()
+        rc = packet.getlayer(Dot11).addr1.upper()
 
         if sn in APs:
             print "AP (%s) [%s] > STA (%s) [%s]" % (sn, manf(sn), rc, manf(rc))
@@ -27,4 +27,4 @@ def pkt_callback(pkt):
             print "AP (%s) [%s] < STA (%s) [%s]" % (rc, manf(rc), sn, manf(sn))
 
 if __name__ == "__main__":
-    sniff(iface="wlan1mon", prn=pkt_callback)
+    sniff(iface="wlan1mon", prn=packet_callback)
