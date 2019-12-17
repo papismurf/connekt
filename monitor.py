@@ -1,6 +1,6 @@
 from scapy.all import *
 
-BSSID_FILE = "/root/bssid.txt"
+BSSID_FILE = "./bssid.txt"
 APs = []
 
 def manf(bss):
