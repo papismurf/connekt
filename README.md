@@ -8,4 +8,9 @@ Clients (devices) conected to a Wifi access point can be detected quite easily v
 
 Activate your Wireless Card Monitor mode
 
-($) airmon-ng start wlan1
+```console
+user@home:~$ airmon-ng start wlan1
+```
+
+We use the sniff package from scapy to scan for nearby packets and output the result.
+
