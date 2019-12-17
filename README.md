@@ -11,3 +11,6 @@ Activate your Wireless Card Monitor mode
 ```console
 user@home:~$ airmon-ng start wlan1
 ```
+
+We use the sniff package from scapy to scan for nearby packets and output the result.
+
